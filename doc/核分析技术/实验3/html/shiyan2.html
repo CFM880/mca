@@ -1,0 +1,145 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>shiyan2</title><meta name="generator" content="MATLAB 8.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-11-24"><meta name="DC.source" content="shiyan2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">&#23454;&#39564;3</a></li><li><a href="#2">&#35835;&#21462;&#25968;&#25454;</a></li><li><a href="#3">&#33719;&#24471;&#25351;&#23450;&#33539;&#22260;&#20869;&#30340;&#25968;&#25454;</a></li><li><a href="#4">&#36827;&#34892;&#19968;&#27425;&#25311;&#21512;&#20809;&#28369;&#35889;&#32447;</a></li><li><a href="#5">&#19968;&#27425;&#27714;&#23548;</a></li><li><a href="#6">&#20116;&#28857;&#26497;&#22823;&#20540;&#27861;&#23547;&#25214;&#23792;&#20301;</a></li><li><a href="#7">&#24471;&#21040;&#36807;&#38646;&#28857;&#30340;&#20004;&#20010;&#28857;</a></li><li><a href="#8">&#30340;&#21040;&#23792;&#20301;&#21363;&#26368;&#22823;&#20540;</a></li><li><a href="#9">&#21033;&#29992;&#26799;&#24418;&#27861;&#27714;&#25351;&#23450;&#33539;&#22260;&#30340;&#38754;&#31215;</a></li><li><a href="#10">&#25913;&#36827;&#22411;&#32447;&#24615;&#26412;&#24213;&#38754;&#31215;</a></li><li><a href="#11">&#39640;&#26031;&#27714;&#23792;&#38754;&#31215;</a></li><li><a href="#12">&#30011;&#22270;</a></li></ul></div><h2>&#23454;&#39564;3<a name="1"></a></h2><pre>&#23547;&#23792;
+TEXT</pre><pre class="codeinput">clear
+clc
+close <span class="string">all</span>
+</pre><h2>&#35835;&#21462;&#25968;&#25454;<a name="2"></a></h2><pre class="codeinput">data=xlsread(<span class="string">'4&#21495;&#26679;.xlsx'</span>,<span class="string">'Sheet1'</span>);
+</pre><h2>&#33719;&#24471;&#25351;&#23450;&#33539;&#22260;&#20869;&#30340;&#25968;&#25454;<a name="3"></a></h2><pre class="codeinput">tmp1=GetMyData(1882,50,data);
+</pre><h2>&#36827;&#34892;&#19968;&#27425;&#25311;&#21512;&#20809;&#28369;&#35889;&#32447;<a name="4"></a></h2><pre class="codeinput">tmp2=FivePointLeastSquaresFitting(tmp1);
+</pre><h2>&#19968;&#27425;&#27714;&#23548;<a name="5"></a></h2><pre class="codeinput">tmp3=FivePointFirstOrder(tmp2);
+</pre><h2>&#20116;&#28857;&#26497;&#22823;&#20540;&#27861;&#23547;&#25214;&#23792;&#20301;<a name="6"></a></h2><pre class="codeinput">tmp5=F5Max(tmp2);
+</pre><h2>&#24471;&#21040;&#36807;&#38646;&#28857;&#30340;&#20004;&#20010;&#28857;<a name="7"></a></h2><pre class="codeinput">tmp6=CrossZeroTwoPoint(tmp3);
+</pre><h2>&#30340;&#21040;&#23792;&#20301;&#21363;&#26368;&#22823;&#20540;<a name="8"></a></h2><pre class="codeinput">max1=FindMax(tmp5);
+</pre><h2>&#21033;&#29992;&#26799;&#24418;&#27861;&#27714;&#25351;&#23450;&#33539;&#22260;&#30340;&#38754;&#31215;<a name="9"></a></h2><pre class="codeinput">area1=CalcTotalArea(1874,1888,tmp2);
+</pre><h2>&#25913;&#36827;&#22411;&#32447;&#24615;&#26412;&#24213;&#38754;&#31215;<a name="10"></a></h2><pre class="codeinput">area2=ImpLinerBackArea(1874,1888,0,0,tmp2);
+</pre><h2>&#39640;&#26031;&#27714;&#23792;&#38754;&#31215;<a name="11"></a></h2><pre class="codeinput">area3=GaussArea(1874,1888,463.142857142857,tmp2);
+</pre><pre class="codeoutput">
+temp =
+
+   1.1514e+05
+
+</pre><h2>&#30011;&#22270;<a name="12"></a></h2><pre class="codeinput">figure
+plot(tmp2(:,1),tmp2(:,2));
+hold <span class="string">on</span>
+plot(tmp3(:,1),tmp3(:,2));
+hold <span class="string">on</span>
+plot(tmp3(:,1),zeros(length(tmp3(:,2))))
+title(<span class="string">'4&#21495;&#20116;&#28857;&#26368;&#23567;&#20108;&#20056;&#25311;&#21512;'</span>);
+xlabel(<span class="string">'&#36947;&#22336;'</span>);
+ylabel(<span class="string">'&#35745;&#25968;'</span>);
+</pre><img vspace="5" hspace="5" src="shiyan2_01.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% 实验3
+% 
+%  寻峰
+%  TEXT
+% 
+clear
+clc
+close all
+%% 读取数据
+data=xlsread('4号样.xlsx','Sheet1');
+%% 获得指定范围内的数据
+tmp1=GetMyData(1882,50,data);
+%% 进行一次拟合光滑谱线
+tmp2=FivePointLeastSquaresFitting(tmp1);
+%% 一次求导
+tmp3=FivePointFirstOrder(tmp2);
+%% 五点极大值法寻找峰位
+tmp5=F5Max(tmp2);
+%% 得到过零点的两个点
+tmp6=CrossZeroTwoPoint(tmp3);
+%% 的到峰位即最大值
+max1=FindMax(tmp5);
+%% 利用梯形法求指定范围的面积
+area1=CalcTotalArea(1874,1888,tmp2);
+%% 改进型线性本底面积
+area2=ImpLinerBackArea(1874,1888,0,0,tmp2);
+%% 高斯求峰面积
+area3=GaussArea(1874,1888,463.142857142857,tmp2);
+%% 画图
+figure
+plot(tmp2(:,1),tmp2(:,2));
+hold on
+plot(tmp3(:,1),tmp3(:,2));
+hold on
+plot(tmp3(:,1),zeros(length(tmp3(:,2))))
+title('4号五点最小二乘拟合');
+xlabel('道址');
+ylabel('计数');
+
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>
