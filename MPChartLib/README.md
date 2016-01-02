@@ -205,3 +205,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 **Special thanks** to [danielgindi](https://github.com/danielgindi), [mikegr](https://github.com/mikegr), [ph1lb4](https://github.com/ph1lb4) and [jitpack.io](https://github.com/jitpack-io) for their contributions to this project.
+
+
+原作者地址
+
+https://github.com/PhilJay/MPAndroidChart
