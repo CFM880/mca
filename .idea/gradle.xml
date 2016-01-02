@@ -9,10 +9,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/FileOperationLib" />
             <option value="$PROJECT_DIR$/MPChartLib" />
             <option value="$PROJECT_DIR$/MaterialFilePickerLib" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/flieoperationlibrary" />
           </set>
         </option>
       </GradleProjectSettings>
