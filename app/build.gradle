@@ -21,6 +21,7 @@ android {
 
 repositories {
     maven {
+
         url  "http://dl.bintray.com/lukaville/maven"
     }
 }
@@ -33,4 +34,5 @@ dependencies {
     compile project(':MaterialFilePickerLib')
     compile project(':MPChartLib')
     compile project(':FileOperationLib')
+    //compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
 }

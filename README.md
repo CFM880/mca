@@ -32,3 +32,13 @@ Android版谱分析软件
 <img src="Screenshots/1.png" height="400" alt="Screenshot"/> <img src="Screenshots/2.png" height="400" alt="Screenshot"/> <img src="Screenshots/3.png" height="400" alt="Screenshot"/>
 
 <img src="Screenshots/4.png" height="400" alt="Screenshot"/> <img src="Screenshots/5.png" height="400" alt="Screenshot"/>
+
+
+
+谱的显示、谱光滑、定性分析程序
+
+算术滑动平均 5 点和 7 点光滑 多项式最小二乘拟合法
+
+简单比较法  一阶导数法   对称零面积法
+
+线性本底法 Covell（科沃尔）峰面积法   Wasson（瓦森、沃森）峰面积法    Sterlinski(斯托林斯基)峰面积法  平均总峰面积法
