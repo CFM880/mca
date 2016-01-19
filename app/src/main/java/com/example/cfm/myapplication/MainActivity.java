@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,10 +14,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.cfm.flieoperationlibrary.FileExtensionName;
 import com.example.cfm.flieoperationlibrary.ReadDataFromFile;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
@@ -24,6 +27,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.filter.Approximator;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
@@ -32,15 +36,16 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        OnChartGestureListener, OnChartValueSelectedListener{
+        OnChartGestureListener, OnChartValueSelectedListener, SaveDialogFragment.SaveDialogListener{
 
     private LineChart mChart;
     private String filePath = "/storage/emulated/0/Gss5-6.mca";
-
+    EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mChart = (LineChart)findViewById(R.id.chart1);
+        editText = (EditText)findViewById(R.id.et_save_path);
         navigationView.setNavigationItemSelectedListener(this);
         setChart(filePath);
     }
@@ -82,17 +88,160 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.actionToggleLine: {
+                List<ILineDataSet> sets = mChart.getData()
+                        .getDataSets();
+
+                for (ILineDataSet iSet : sets) {
+                    LineDataSet set = (LineDataSet) iSet;
+
+                    set.getDashPathEffect();
+                    if (set.getDashPathEffect() != null)
+                    {
+                        lineSetting(set);
+                    } else{
+                       pointSetting(set);
+                    }
+                }
+
+                mChart.invalidate();
+                break;
+
+            }
+            case R.id.actionToggleValues: {
+                List<ILineDataSet> sets = mChart.getData()
+                        .getDataSets();
+
+                for (ILineDataSet iSet : sets) {
+
+                    LineDataSet set = (LineDataSet) iSet;
+                    set.setDrawValues(!set.isDrawValuesEnabled());
+                }
+
+                mChart.invalidate();
+                break;
+            }
+            case R.id.actionToggleHighlight: {
+                if(mChart.getData() != null) {
+                    mChart.getData().setHighlightEnabled(!mChart.getData().isHighlightEnabled());
+                    mChart.invalidate();
+                }
+                break;
+            }
+            case R.id.actionToggleFilled: {
+
+                List<ILineDataSet> sets = mChart.getData()
+                        .getDataSets();
+
+                for (ILineDataSet iSet : sets) {
+
+                    LineDataSet set = (LineDataSet) iSet;
+                    if (set.isDrawFilledEnabled())
+                        set.setDrawFilled(false);
+                    else
+                        set.setDrawFilled(true);
+                }
+                mChart.invalidate();
+                break;
+            }
+            case R.id.actionToggleCircles: {
+                List<ILineDataSet> sets = mChart.getData()
+                        .getDataSets();
+
+                for (ILineDataSet iSet : sets) {
+
+                    LineDataSet set = (LineDataSet) iSet;
+                    if (set.isDrawCirclesEnabled())
+                        set.setDrawCircles(false);
+                    else
+                        set.setDrawCircles(true);
+                }
+                mChart.invalidate();
+                break;
+            }
+            case R.id.actionToggleCubic: {
+                List<ILineDataSet> sets = mChart.getData()
+                        .getDataSets();
+
+                for (ILineDataSet iSet : sets) {
+
+                    LineDataSet set = (LineDataSet) iSet;
+                    if (set.isDrawCubicEnabled())
+                        set.setDrawCubic(false);
+                    else
+                        set.setDrawCubic(true);
+                }
+                mChart.invalidate();
+                break;
+            }
+            case R.id.actionToggleStartzero: {
+                mChart.getAxisLeft().setStartAtZero(!mChart.getAxisLeft().isStartAtZeroEnabled());
+                mChart.getAxisRight().setStartAtZero(!mChart.getAxisRight().isStartAtZeroEnabled());
+                mChart.invalidate();
+                break;
+            }
+            case R.id.actionTogglePinch: {
+                if (mChart.isPinchZoomEnabled())
+                    mChart.setPinchZoom(false);
+                else
+                    mChart.setPinchZoom(true);
+
+                mChart.invalidate();
+                break;
+            }
+            case R.id.actionToggleAutoScaleMinMax: {
+                mChart.setAutoScaleMinMaxEnabled(!mChart.isAutoScaleMinMaxEnabled());
+                mChart.notifyDataSetChanged();
+                break;
+            }
+            case R.id.animateX: {
+                mChart.animateX(3000);
+                break;
+            }
+            case R.id.animateY: {
+                mChart.animateY(3000, Easing.EasingOption.EaseInCubic);
+                break;
+            }
+            case R.id.animateXY: {
+                mChart.animateXY(3000, 3000);
+                break;
+            }
+            case R.id.actionToggleFilter: {
+
+                // the angle of filtering is 35°
+                Approximator a = new Approximator(Approximator.ApproximatorType.DOUGLAS_PEUCKER, 35);
+
+                if (!mChart.isFilteringEnabled()) {
+                    mChart.enableFiltering(a);
+                } else {
+                    mChart.disableFiltering();
+                }
+                mChart.invalidate();
+                break;
+            }
+            case R.id.actionSave: {
+                if (mChart.saveToPath("title" + System.currentTimeMillis(), "")) {
+                    Toast.makeText(getApplicationContext(), "Saving SUCCESSFUL!",
+                            Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getApplicationContext(), "Saving FAILED!", Toast.LENGTH_SHORT)
+                            .show();
+
+                // mChart.saveToGallery("title"+System.currentTimeMillis())
+                break;
+            }
         }
+        return true;
+    }
 
-        return super.onOptionsItemSelected(item);
+    public void lineSetting(LineDataSet set) {
+        set.disableDashedLine();
+        set.setLineWidth(2f);
+        set.setDrawValues(false);
+        set.setDrawCircles(false);
+        set.setDrawFilled(false);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -111,6 +260,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
+
+            SaveDialogFragment dialogFragment = new SaveDialogFragment();
+            dialogFragment.show(getSupportFragmentManager(), "SaveDialogFragment");
+
 
         }
 //        else if (id == R.id.nav_share) {
@@ -148,18 +301,9 @@ public class MainActivity extends AppCompatActivity
             yVals.add(new Entry(val, i));
         }
 
-        LineDataSet set1 = new LineDataSet(yVals, "DataSet1");
+        LineDataSet set1 = new LineDataSet(yVals, "计数");
 
-        set1.enableDashedLine(10f, 5f, 0f);
-        set1.enableDashedHighlightLine(10f, 5f, 0f);
-        set1.setColor(Color.BLACK);
-        set1.setCircleColor(Color.BLACK);
-        set1.setLineWidth(1f);
-        set1.setCircleSize(3f);
-        set1.setDrawCircleHole(false);
-        set1.setValueTextSize(9f);
-        set1.setFillAlpha(65);
-        set1.setFillColor(Color.BLACK);
+        pointSetting(set1);
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         dataSets.add(set1); // add the datasets
 
@@ -184,18 +328,9 @@ public class MainActivity extends AppCompatActivity
             yVals.add(new Entry(val, i));
         }
 
-        LineDataSet set1 = new LineDataSet(yVals, "DataSet1");
+        LineDataSet set1 = new LineDataSet(yVals, "计数率");
 
-        set1.enableDashedLine(10f, 5f, 0f);
-        set1.enableDashedHighlightLine(10f, 5f, 0f);
-        set1.setColor(Color.BLACK);
-        set1.setCircleColor(Color.BLACK);
-        set1.setLineWidth(1f);
-        set1.setCircleSize(3f);
-        set1.setDrawCircleHole(false);
-        set1.setValueTextSize(9f);
-        set1.setFillAlpha(65);
-        set1.setFillColor(Color.BLACK);
+        pointSetting(set1);
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         dataSets.add(set1); // add the datasets
 
@@ -206,6 +341,22 @@ public class MainActivity extends AppCompatActivity
         mChart.setData(data1);
 
     }
+
+    private void pointSetting(LineDataSet set) {
+        set.enableDashedLine(10f, 5f, 0f);
+        set.enableDashedHighlightLine(10f, 5f, 0f);
+        set.setColor(Color.BLACK);
+        set.setCircleColor(Color.BLACK);
+        set.setLineWidth(0f);
+        set.setCircleSize(3f);
+        set.setDrawCircles(true);
+        set.setDrawCircleHole(false);
+        set.setValueTextSize(9f);
+        set.setFillAlpha(65);
+        set.setFillColor(Color.BLACK);
+        set.setDrawValues(false);
+    }
+
     public void setChart(String filePath){
         /***********************************绘图**********************************/
         mChart = (LineChart)findViewById(R.id.chart1);
@@ -239,17 +390,14 @@ public class MainActivity extends AppCompatActivity
         llXAxis.setTextSize(10f);
 
         XAxis xAxis = mChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        //Typeface tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
-//        leftAxis.addLimitLine(ll1);
-//        leftAxis.addLimitLine(ll2);
-        leftAxis.setAxisMaxValue(40000f);
+
         leftAxis.setAxisMinValue(0f);
         leftAxis.setStartAtZero(false);
-        //leftAxis.setYOffset(20f);
         leftAxis.enableGridDashedLine(10f, 10f, 0f);
 
         // limit lines are drawn behind data (and not on top)
@@ -324,6 +472,20 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onNothingSelected() {
+
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+         String targetPath = editText.getText().toString();
+        Log.i("targetPath", targetPath);
+//        mChart.getLineData().getXVals();
+//        Log.i("targetPath",data);
+
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
 
     }
 }

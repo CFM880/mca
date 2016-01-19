@@ -1,9 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/actionToggleLine"
+        android:title="折线/点">
+    </item>
+
+    <item
+        android:id="@+id/actionToggleValues"
+        android:title="数据可见">
+    </item>
+    <item
+        android:id="@+id/actionToggleFilled"
+        android:title="填充谱线">
+    </item>
+    <item
+        android:id="@+id/actionToggleCircles"
+        android:title="选中数据组">
+    </item>
+    <item
+        android:id="@+id/actionToggleCubic"
+        android:title="可选中数据">
+    </item>
+    <item
+        android:id="@+id/actionToggleHighlight"
+        android:title="是否高亮">
+    </item>
+    <item
+        android:id="@+id/actionToggleStartzero"
+        android:title="是否从0开始">
+    </item>
+    <item
+        android:id="@+id/animateX"
+        android:title="以X轴动态显示">
+    </item>
+    <item
+        android:id="@+id/animateY"
+        android:title="以Y轴动态显示">
+    </item>
+    <item
+        android:id="@+id/animateXY"
+        android:title="以XY轴动态显示">
+    </item>
+    <item
+        android:id="@+id/actionToggleAdjustXLegend"
+        android:title="调整XLegend">
+    </item>
+    <item
+        android:id="@+id/actionToggleFilter"
+        android:title="过滤">
+    </item>
+    <item
+        android:id="@+id/actionSave"
+        android:title="保存为图片">
+    </item>
+    <item
+        android:id="@+id/actionTogglePinch"
+        android:title="双指缩放">
+    </item>
+    <item
+        android:id="@+id/actionToggleAutoScaleMinMax"
+        android:title="自动最大/最小">
+    </item>
 </menu>

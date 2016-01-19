@@ -104,6 +104,9 @@ public abstract class Utils {
 
         DisplayMetrics metrics = mMetrics;
         float px = dp * (metrics.densityDpi / 160f);
+        if (dp == 0f){
+            px = 0;
+        }
         return px;
     }
 
